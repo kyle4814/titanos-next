@@ -1,0 +1,81 @@
+/* Black Ice, X-Ray and dossier pages: local helpers on top of the sitewide obsidian and gold system (site-system.css). */
+.bi-h2 {
+  font-family: var(--font-body), system-ui, sans-serif;
+  color: var(--pe-text);
+  font-weight: 700;
+  font-size: var(--pe-fs-h3);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0 0 var(--pe-sp-4);
+  text-transform: none;
+}
+.bi-h2--lg { font-size: var(--pe-fs-h2); }
+.bi-h2--center { text-align: center; }
+.bi-h2::before {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 2px;
+  margin-bottom: var(--pe-sp-3);
+  background: var(--pe-gold-grad);
+  border-radius: 2px;
+}
+.bi-h2--center::before { margin-left: auto; margin-right: auto; }
+.bi-p { color: var(--pe-mute); font-size: var(--pe-fs-body); line-height: 1.75; margin: 0 0 var(--pe-sp-3); }
+.bi-p a { color: var(--pe-gold-hi); text-decoration: underline; text-underline-offset: 3px; }
+.bi-p strong, .bi-lead strong { color: var(--pe-text); }
+.bi-lead { color: var(--pe-mute); font-size: var(--pe-fs-lead); line-height: 1.65; max-width: 62ch; margin: 0 auto var(--pe-sp-5); }
+.bi-list { color: var(--pe-mute); font-size: var(--pe-fs-body); line-height: 1.75; padding-left: 22px; margin: 0 0 var(--pe-sp-4); }
+.bi-list li { margin-bottom: 8px; }
+.bi-list li::marker { color: var(--pe-gold); }
+.bi-loop {
+  color: var(--pe-gold-hi);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--pe-fs-sm);
+  letter-spacing: 0.08em;
+  text-align: center;
+  margin: var(--pe-sp-4) 0;
+  padding: var(--pe-sp-4);
+  border: 1px solid var(--pe-line-gold);
+  border-radius: var(--pe-r-card);
+  background: var(--pe-card);
+}
+.bi-prims {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: var(--pe-wrap);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--pe-sp-4);
+}
+.bi-prim {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: var(--pe-sp-3);
+  align-items: start;
+  padding: var(--pe-sp-5) var(--pe-sp-4);
+  background: var(--pe-card);
+  border: 1px solid var(--pe-line);
+  border-top-color: var(--pe-line-gold);
+  border-radius: var(--pe-r-card);
+}
+.bi-prim__n { font-family: var(--font-mono), monospace; font-size: var(--pe-fs-sm); color: var(--pe-gold); }
+.bi-prim__name { color: var(--pe-text); font-weight: 700; font-size: var(--pe-fs-lead); letter-spacing: 0.08em; margin-bottom: 4px; }
+.bi-prim__line { color: var(--pe-mute); font-size: var(--pe-fs-sm); line-height: 1.6; }
+.bi-sec-n { font-family: var(--font-mono), monospace; font-size: var(--pe-fs-xs); letter-spacing: var(--pe-track-eyebrow); color: var(--pe-gold); margin-bottom: var(--pe-sp-2); }
+.bi-toc { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+.bi-toc li { display: flex; align-items: baseline; gap: 8px; padding: 6px 12px; border: 1px solid var(--pe-line); border-radius: var(--pe-r-md); background: var(--pe-card); }
+.bi-toc a { color: var(--pe-text); text-decoration: none; display: inline-block; padding: 4px 0; font-size: var(--pe-fs-sm); }
+.bi-toc a:hover { color: var(--pe-gold-hi); }
+.bi-toc a:focus-visible { outline: 2px solid var(--pe-gold); outline-offset: 3px; }
+.bi-band { border-top: 1px solid var(--pe-line); }
+.bi-xray-promise { background: var(--pe-card); border: 1px solid var(--pe-line); border-top-color: var(--pe-line-gold); border-radius: var(--pe-r-card); padding: var(--pe-sp-5); }
+.bi-dossier-list { display: grid; gap: var(--pe-sp-4); }
+.bi-dossier { background: var(--pe-card); border: 1px solid var(--pe-line); border-top-color: var(--pe-line-gold); border-radius: var(--pe-r-card); padding: var(--pe-sp-5); transition: border-color var(--pe-dur) var(--pe-ease); }
+.bi-dossier:hover { border-color: var(--pe-line-gold); }
+.bi-dossier h2 { margin: var(--pe-sp-2) 0; font-size: var(--pe-fs-h3); }
+.bi-dossier p { margin: 0; }
+@media (max-width: 720px) {
+  .bi-prims { grid-template-columns: 1fr; }
+}

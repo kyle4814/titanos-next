@@ -7,6 +7,7 @@ import AnimatedButton from "@/components/AnimatedButton";
 import FaqItem from "@/components/FaqItem";
 import MirrorLists from "@/components/MirrorLists";
 import { AUDIT_MESSAGE_HREF } from "@/lib/config";
+import "../bi.css";
 
 const META_TITLE = "The Black Ice Field Guide: Human × AI Operating Doctrine · TITANOS";
 const META_DESC =
@@ -46,7 +47,7 @@ function Section({
 }) {
   // Depth cue: alternating undertone so scrolling reads as descending
   // through layers rather than a flat wall of identical sections.
-  const layerBg = index % 2 === 0 ? "var(--vault-warm)" : "transparent";
+  const layerBg = index % 2 === 0 ? "var(--pe-bg2)" : "transparent";
   return (
     <>
       <div className="divider-gold" />
@@ -61,27 +62,10 @@ function Section({
         }}
       >
         <div style={{ maxWidth: wide ? "var(--maxw-content)" : "var(--maxw-prose)", margin: "0 auto" }}>
-          <div
-            aria-hidden="true"
-            style={{
-              fontFamily: "var(--font-mono), monospace",
-              fontSize: "var(--fs-xs)",
-              letterSpacing: "0.2em",
-              color: "var(--gold-dim)",
-              marginBottom: 10,
-            }}
-          >
+          <div aria-hidden="true" className="bi-sec-n">
             {String(index).padStart(2, "0")} / {String(SECTION_TOTAL).padStart(2, "0")}
           </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display), Georgia, serif",
-              color: "var(--gold)",
-              fontSize: "var(--fs-h3)",
-              letterSpacing: "0.06em",
-              marginBottom: 16,
-            }}
-          >
+          <h2 className="bi-h2">
             {title}
           </h2>
           {children}
@@ -93,7 +77,7 @@ function Section({
 
 function P({ children }: { children: React.ReactNode }) {
   return (
-    <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8, marginBottom: 14 }}>
+    <p className="bi-p">
       {children}
     </p>
   );
@@ -203,7 +187,7 @@ export default function BlackIceDoctrinePage() {
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <a href={`#${id}`} style={{ color: "var(--ice)", fontSize: "var(--fs-sm)", textDecoration: "none", display: "inline-block", padding: "4px 0" }}>
+                  <a href={`#${id}`} style={{ color: "var(--pe-text)", fontSize: "var(--fs-sm)", textDecoration: "none", display: "inline-block", padding: "4px 0" }}>
                     {label}
                   </a>
                 </li>
@@ -374,16 +358,7 @@ export default function BlackIceDoctrinePage() {
           Everything above compresses to one loop, run continuously rather than restarted
           from scratch each time:
         </P>
-        <p
-          style={{
-            fontFamily: "var(--font-display), Georgia, serif",
-            color: "var(--gold)",
-            fontSize: "var(--fs-lg)",
-            letterSpacing: "0.08em",
-            textAlign: "center",
-            margin: "18px 0",
-          }}
-        >
+        <p className="bi-loop">
           OBSERVE → ORIENT → COMPRESS → DECIDE → ACT → MEASURE → CORRECT → REPEAT
         </p>
         <P>
@@ -484,26 +459,10 @@ export default function BlackIceDoctrinePage() {
           zIndex: 2,
         }}
       >
-        <h2
-          style={{
-            fontFamily: "var(--font-display), Georgia, serif",
-            color: "var(--gold)",
-            fontSize: "var(--fs-h2)",
-            letterSpacing: "0.06em",
-            marginBottom: 18,
-          }}
-        >
+        <h2 className="bi-h2 bi-h2--lg bi-h2--center">
           SEE IT APPLIED
         </h2>
-        <p
-          style={{
-            color: "var(--text)",
-            fontSize: "var(--fs-lg)",
-            maxWidth: "var(--maxw-prose)",
-            margin: "0 auto 26px",
-            lineHeight: 1.7,
-          }}
-        >
+        <p className="bi-lead">
           This isn&apos;t theory published by a marketing team. It&apos;s the doctrine
           TITANOS itself runs on. See it applied on a real audit, or bring it to your own
           systems.

@@ -9,6 +9,7 @@ import { Bluf, Analogy, Pillars, FrontLoad, FreeStart } from "@/components/Sales
 import { FlexNumber, OpenLoop } from "@/components/FlexBlock";
 import { FLEX } from "@/lib/flex";
 import W2d from "@/components/w2d/W2d";
+import "./bi.css";
 
 const META_TITLE = "Black Ice: The Human × AI Operating Doctrine · TITANOS";
 const META_DESC =
@@ -83,18 +84,10 @@ export default function BlackIcePage() {
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "var(--maxw-prose)", margin: "0 auto" }}>
-          <h2
-            style={{
-              fontFamily: "var(--font-display), Georgia, serif",
-              color: "var(--gold)",
-              fontSize: "var(--fs-h3)",
-              letterSpacing: "0.06em",
-              marginBottom: 16,
-            }}
-          >
+          <h2 className="bi-h2">
             What Black Ice actually is
           </h2>
-          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8, marginBottom: 14 }}>
+          <p className="bi-p">
             A polished black surface, enormous depth underneath. That&apos;s the whole idea.
             Most &quot;AI productivity&quot; content is either empty branding or a
             prompt-hack thread. Black Ice is neither. It&apos;s a small set of reusable
@@ -102,7 +95,7 @@ export default function BlackIcePage() {
             what&apos;s left, with AI doing the keystroke work and a human holding the one
             decision that actually needs judgement.
           </p>
-          <p style={{ color: "var(--text)", fontSize: "var(--fs-body)", lineHeight: 1.8 }}>
+          <p className="bi-p">
             A fair thing to ask of your own week: how much of it is work an AI could already
             do, and how much is the one call only you should make? The language here
             borrows metaphor on purpose, ice, depth, stillness. The field guide is plain about
@@ -118,65 +111,18 @@ export default function BlackIcePage() {
 
       <SectionReveal style={{ padding: "var(--space-20) 20px", position: "relative", zIndex: 2 }}>
         <SectionHeading title="The twelve primitives" lead="The full loop, compressed to one line each. The detail lives on the field guide page." />
-        <ol
-          style={{
-            listStyle: "none",
-            margin: 0,
-            padding: 0,
-            maxWidth: "var(--maxw-content)",
-            marginLeft: "auto",
-            marginRight: "auto",
-            borderLeft: "1px solid rgb(var(--gold-rgb) / 0.18)",
-          }}
-        >
-          {PRIMITIVES.map((p, i) => {
-            // Depth cue: darker undertone and dimmer gold the further
-            // into the loop you read, mimicking a descent.
-            const depth = i / (PRIMITIVES.length - 1);
-            return (
-              <li
-                key={p.name}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "clamp(40px, 6vw, 56px) 1fr",
-                  gap: "clamp(14px, 2.5vw, 24px)",
-                  alignItems: "baseline",
-                  padding: "var(--space-4) clamp(16px, 3vw, 28px)",
-                  background: i % 2 === 1 ? "rgb(var(--gold-rgb) / 0.03)" : "transparent",
-                  borderBottom:
-                    i === PRIMITIVES.length - 1 ? "none" : "1px solid var(--border)",
-                }}
-              >
-                <span
-                  aria-hidden="true"
-                  style={{
-                    fontFamily: "var(--font-mono), monospace",
-                    fontSize: "var(--fs-sm)",
-                    color: `rgb(var(--gold-rgb) / ${(0.85 - depth * 0.45).toFixed(2)})`,
-                    letterSpacing: "0.05em",
-                  }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-display), Georgia, serif",
-                      color: "var(--gold)",
-                      fontSize: "var(--fs-lg)",
-                      letterSpacing: "0.1em",
-                      marginBottom: 4,
-                    }}
-                  >
-                    {p.name}
-                  </div>
-                  <div style={{ color: "var(--dim)", fontSize: "var(--fs-sm)", lineHeight: 1.6 }}>
-                    {p.line}
-                  </div>
-                </div>
-              </li>
-            );
-          })}
+        <ol className="bi-prims">
+          {PRIMITIVES.map((p, i) => (
+            <li key={p.name} className="bi-prim">
+              <span aria-hidden="true" className="bi-prim__n">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <div className="bi-prim__name">{p.name}</div>
+                <div className="bi-prim__line">{p.line}</div>
+              </div>
+            </li>
+          ))}
         </ol>
       </SectionReveal>
 
@@ -190,26 +136,10 @@ export default function BlackIcePage() {
           zIndex: 2,
         }}
       >
-        <h2
-          style={{
-            fontFamily: "var(--font-display), Georgia, serif",
-            color: "var(--gold)",
-            fontSize: "var(--fs-h2)",
-            letterSpacing: "0.06em",
-            marginBottom: 18,
-          }}
-        >
+        <h2 className="bi-h2 bi-h2--lg bi-h2--center">
           Would it be okay if you had a read?
         </h2>
-        <p
-          style={{
-            color: "var(--text)",
-            fontSize: "var(--fs-lg)",
-            maxWidth: "var(--maxw-prose)",
-            margin: "0 auto 26px",
-            lineHeight: 1.7,
-          }}
-        >
+        <p className="bi-lead">
           Free, no signup, and nothing to buy afterwards. It is the same working framework behind everything else on this site. If it is not your cup of tea, a no is welcome.
         </p>
         <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
