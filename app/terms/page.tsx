@@ -3,6 +3,7 @@ import { ALL_OFFERS, availability } from "@/lib/offers";
 import { withSeo } from "@/lib/seo";
 import SectionReveal from "@/components/SectionReveal";
 import PageHero from "@/components/PageHero";
+import "../privacy/g8-legal.css";
 import { DISPLAY, PRICING } from "@/lib/pricing";
 import { Inscription, SystemLabel, DepthIndex, OperatorNote, OmegaSeal } from "@/components/Myth";
 import W2d from "@/components/w2d/W2d";
@@ -33,6 +34,7 @@ export const metadata: Metadata = withSeo("/terms", baseMetadata);
 export default function TermsPage() {
   return (
     <W2d>
+      <div className="g8-legal">
       <PageHero title="Terms of Service" tagline="Last updated 2026-10-05 · effective from this date" />
 
       <section aria-label="The commitment" style={{ padding: "0 20px var(--space-10)", position: "relative", zIndex: 2 }}>
@@ -55,15 +57,7 @@ export default function TermsPage() {
       </SectionReveal>
 
       <SectionReveal style={{ padding: "0 20px 100px", position: "relative", zIndex: 2 }}>
-        <article
-          style={{
-            maxWidth: "var(--maxw-prose)",
-            margin: "0 auto",
-            color: "var(--text)",
-            fontSize: "var(--fs-body)",
-            lineHeight: 1.75,
-          }}
-        >
+        <article className="g8-doc">
           <p style={{ marginBottom: 18 }}>
             These terms govern your use of titanos.tech and any engagement with Titanos (Kyle
             Deligny, ABN 34 318 502 254).
@@ -166,7 +160,7 @@ export default function TermsPage() {
           <H2>Contact</H2>
           <p>
             Email{" "}
-            <a href="mailto:kyle@titanos.tech" style={{ color: "var(--ice)" }}>
+            <a href="mailto:kyle@titanos.tech" style={{ color: "var(--pe-gold-hi)" }}>
               kyle@titanos.tech
             </a>
             .
@@ -180,6 +174,7 @@ export default function TermsPage() {
           style={{ margin: "0 auto" }}
         />
       </section>
+          </div>
     </W2d>
   );
 }
@@ -188,12 +183,11 @@ function H2({ children }: { children: React.ReactNode }) {
   return (
     <h2
       style={{
-        fontFamily: "var(--font-display), Georgia, serif",
-        color: "var(--gold)",
-        fontSize: "var(--fs-h3)",
+        color: "var(--pe-text)",
+        fontSize: "var(--pe-fs-h3)",
         fontWeight: 700,
-        margin: "36px 0 12px",
-        letterSpacing: "0.04em",
+        margin: "8px 0 12px",
+        letterSpacing: "-0.01em",
       }}
     >
       {children}
