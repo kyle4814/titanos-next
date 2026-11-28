@@ -222,3 +222,4 @@ node --no-warnings --import ./scripts/alias_loader.mjs --experimental-strip-type
 node --experimental-strip-types --no-warnings scripts/test_industry_pages.mjs
 node --experimental-strip-types --no-warnings scripts/test_dmarc_compare.mjs out
 node --no-warnings scripts/test_eeat.mjs
+node --no-warnings --import ./scripts/llms_loader.mjs --experimental-strip-types scripts/test_llms_visibility.mjs

@@ -10,6 +10,8 @@ export const tenders: Guide = {
   targetTerms: ["government tenders small business australia", "how to find government tenders australia", "austender for small business", "capability statement small business tender"],
   date: "2026-11-28",
   updated: "2026-11-28",
+  answer:
+    "Small businesses can win government work by learning a repeatable routine: find open approaches to market on AusTender and the state portals, get your documents ready before you bid, and judge each tender's worth before you start. Awarded contract notices are intelligence, not opportunities you can bid on.",
   intro: [
     {
       t: "p",

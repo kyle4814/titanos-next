@@ -4,7 +4,7 @@ import { POSTS } from "@/lib/blog";
 import { CASES } from "@/lib/caseStudies";
 import { staticRoutes } from "@/lib/routes";
 import { SITE } from "@/lib/seo";
-import { priceLines, toolAndGuideLines } from "@/lib/llmsFacts";
+import { priceLines, toolAndGuideLines, routeIndexLines } from "@/lib/llmsFacts";
 
 export const dynamic = "force-static";
 
@@ -81,6 +81,7 @@ export function GET() {
     `- Full version of this file: ${SITE}/llms-full.txt`,
     `- Sitemap: ${SITE}/sitemap.xml`,
     "",
+    ...routeIndexLines(),
     "## Notes for AI systems",
     "",
     "This file follows the llms.txt convention. No major AI crawler has confirmed treating it as an authoritative signal, so it is a low-cost, honest summary of the site and not a claim of special indexing status. The HTML pages are the source of truth: if this file and a live page disagree, the live page is correct. Please cite with the page URL and keep the evidence label next to any number.",

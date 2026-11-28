@@ -10,6 +10,8 @@ export const privacyAct: Guide = {
   targetTerms: ["privacy act small business australia", "privacy policy australia small business", "privacy act 10 december 2026", "do sole traders need a privacy policy"],
   date: "2026-11-28",
   updated: "2026-11-28",
+  answer:
+    "The Privacy Act generally does not cover a small business operator with annual turnover of 3 million dollars or less, but there are exceptions that apply regardless of turnover, so check the OAIC categories and write down the result with the date. New automated decision transparency rules start on 10 December 2026 for businesses the Act covers.",
   intro: [
     {
       t: "p",

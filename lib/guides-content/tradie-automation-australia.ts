@@ -10,6 +10,8 @@ export const tradieAutomation: Guide = {
   targetTerms: ["ai for tradies australia", "missed call text back tradies australia", "quote follow up tradies", "tradie automation"],
   date: "2026-11-28",
   updated: "2026-11-28",
+  answer:
+    "Automate four things first, in this order: missed calls, quote follow-up, invoice chasing and review requests. They are the admin gaps that cost a small trade business the most, and software handles them well. Size the gain with your own numbers, and keep the Spam Act 2003 rules in mind for every text.",
   intro: [
     {
       t: "p",
