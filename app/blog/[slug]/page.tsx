@@ -61,19 +61,10 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const related = getRelatedPosts(post);
-  const url = `https://titanos.tech/blog/${post.slug}`;
 
   const articleJsonLd = article({ path: `/blog/${post.slug}`, headline: post.title, description: post.description, datePublished: post.date, dateModified: post.updated || post.date });
 
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://titanos.tech/" },
-      { "@type": "ListItem", position: 2, name: "Blog", item: "https://titanos.tech/blog" },
-      { "@type": "ListItem", position: 3, name: post.title, item: url },
-    ],
-  };
+  const breadcrumbJsonLd = breadcrumbs([{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }, { name: post.title, path: `/blog/${post.slug}` }]);
 
   const faqJsonLd = faqPage(post.faq ?? []);
 
