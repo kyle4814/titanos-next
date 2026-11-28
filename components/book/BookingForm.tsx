@@ -75,12 +75,12 @@ export default function BookingForm() {
         <>
           <div role="group" aria-label="Day" className="g4-chips">
             {days.map((d) => (
-              <button key={d.key} type="button" className="g4-chip" aria-pressed={d.key === activeDay.key} onClick={() => { setDay(d.key); setSlot(null); }}>{d.label}</button>
+              <button key={d.key} type="button" className="g4-chip" style={{ minHeight: 48 }} aria-pressed={d.key === activeDay.key} onClick={() => { setDay(d.key); setSlot(null); }}>{d.label}</button>
             ))}
           </div>
           <div role="group" aria-label={`Times on ${activeDay.label}`} className="g4-times">
             {activeDay.slots.map((s) => (
-              <button key={s.iso} type="button" className="g4-chip" aria-pressed={slot === s.iso} onClick={() => setSlot(s.iso)}>
+              <button key={s.iso} type="button" className="g4-chip" style={{ minHeight: 48 }} aria-pressed={slot === s.iso} onClick={() => setSlot(s.iso)}>
                 {s.local}
                 <small>Brisbane {s.brisbane}</small>
               </button>
@@ -91,11 +91,11 @@ export default function BookingForm() {
 
       <h2>2. Your details</h2>
       <form onSubmit={submit} noValidate={false} className="g4-form pe-card pe-card--pad">
-        <div className="pe-field"><label htmlFor="bk-name">Your name</label><input id="bk-name" name="name" type="text" autoComplete="name" required maxLength={100} /></div>
-        <div className="pe-field"><label htmlFor="bk-business">Your business</label><input id="bk-business" name="business" type="text" autoComplete="organization" required maxLength={120} /></div>
-        <div className="pe-field"><label htmlFor="bk-email">Email</label><input id="bk-email" name="email" type="email" autoComplete="email" required maxLength={254} /></div>
-        <div className="pe-field"><label htmlFor="bk-phone">Phone (optional)</label><input id="bk-phone" name="phone" type="tel" autoComplete="tel" maxLength={24} /></div>
-        <div className="pe-field"><label htmlFor="bk-eats">What eats your week?</label><textarea id="bk-eats" name="eatsWeek" required maxLength={1000} rows={4} style={{ resize: "vertical" }} /></div>
+        <div className="pe-field"><label htmlFor="bk-name">Your name</label><input id="bk-name" name="name" type="text" autoComplete="name" required maxLength={100} style={{ minHeight: 44, fontSize: 16 }} /></div>
+        <div className="pe-field"><label htmlFor="bk-business">Your business</label><input id="bk-business" name="business" type="text" autoComplete="organization" required maxLength={120} style={{ minHeight: 44, fontSize: 16 }} /></div>
+        <div className="pe-field"><label htmlFor="bk-email">Email</label><input id="bk-email" name="email" type="email" autoComplete="email" required maxLength={254} style={{ minHeight: 44, fontSize: 16 }} /></div>
+        <div className="pe-field"><label htmlFor="bk-phone">Phone (optional)</label><input id="bk-phone" name="phone" type="tel" autoComplete="tel" maxLength={24} style={{ minHeight: 44, fontSize: 16 }} /></div>
+        <div className="pe-field"><label htmlFor="bk-eats">What eats your week?</label><textarea id="bk-eats" name="eatsWeek" required maxLength={1000} rows={4} style={{ resize: "vertical", fontSize: 16 }} /></div>
         {/* Honeypot: invisible to people and to the keyboard, bots fill it. A filled value is dropped on the server. */}
         <div aria-hidden="true" className="g4-hp">
           <label htmlFor="bk-website">Leave this empty</label>

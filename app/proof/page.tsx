@@ -63,7 +63,7 @@ export default function Proof() {
       <OpenLoop>That is the headline. What did the replay find that we did not expect?</OpenLoop>
       <section className="pe-proof__sec">
         <div className="pe-page pe-page--narrow">
-          <h2 className="pe-proof__h"><span className="pe-proof__n">01</span>Public code, every change timestamped</h2>
+          <h2 className="pe-proof__h">1. Public code, every change timestamped</h2>
           <ul className="pe-proof__p">
             <li>
               This website&apos;s source, every change dated to the second:{" "}
@@ -79,7 +79,7 @@ export default function Proof() {
             </li>
           </ul>
 
-          <h2 className="pe-proof__h"><span className="pe-proof__n">02</span>Full test runs, with timestamps</h2>
+          <h2 className="pe-proof__h">2. Full test runs, with timestamps</h2>
           <p className="pe-proof__p">Raw logs, each line stamped with the time it ran (7 October 2026, Brisbane time). No summary written afterwards, just the output:</p>
           <ul className="pe-proof__p">
             <li>
@@ -94,7 +94,7 @@ export default function Proof() {
             </li>
           </ul>
 
-          <h2 className="pe-proof__h"><span className="pe-proof__n">03</span>The 3.5-hour build, replayed commit by commit</h2>
+          <h2 className="pe-proof__h">3. The 3.5-hour build, replayed commit by commit</h2>
           <p className="pe-proof__p">
             Think of a builder&apos;s time-lapse. We checked out every one of the 57 saved versions of the trading app in order and ran its tests. Each line of
             the replay shows when that version was saved, its ID, and how many tests passed. Tests grew from 20 at 05:41 to

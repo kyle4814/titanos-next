@@ -3,6 +3,7 @@ import SeatAnchors from "@/components/SeatAnchors";
 import { ANCHORS } from "./anchors";
 import WhiteLabelReport from "@/components/WhiteLabelReport";
 import ProClient from "./client";
+import "./pro-seat.css";
 
 export const metadata: Metadata = {
   title: "Pro seat | TITANOS",

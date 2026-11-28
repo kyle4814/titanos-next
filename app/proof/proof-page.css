@@ -2,8 +2,8 @@
 .pe-proofpage { position: relative; z-index: 2; }
 .pe-proofpage .pe-proof__sec { padding-block: var(--pe-section-y, 64px); }
 .pe-proofpage .pe-proof__sec > .pe-page--narrow > *:first-child { margin-top: 0; }
-.pe-proofpage .pe-proof__h { color: var(--pe-text); font-size: var(--pe-fs-h3, 1.5rem); font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; margin: 48px 0 14px; display: flex; gap: 12px; align-items: baseline; }
-.pe-proofpage .pe-proof__h .pe-proof__n { color: var(--pe-gold); font-family: var(--font-mono, monospace); font-size: 0.8em; }
+.pe-proofpage .pe-proof__h { color: var(--pe-text); font-size: var(--pe-fs-h3, 1.5rem); font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; margin: 48px 0 14px; }
+.pe-proofpage .pe-proof__h::first-letter { color: var(--pe-gold); font-family: var(--font-mono, monospace); }
 .pe-proofpage .pe-proof__p { color: var(--pe-mute); font-size: var(--pe-fs-body, 1rem); line-height: 1.75; margin: 0 0 14px; }
 .pe-proofpage ul.pe-proof__p { padding-left: 20px; }
 .pe-proofpage ul.pe-proof__p li { margin-bottom: 8px; }
