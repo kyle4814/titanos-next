@@ -64,7 +64,7 @@ export function fullLines(): string[] {
     "",
     `${GLOSSARY.length} short definitions at ${SITE}/glossary, including:`,
     "",
-    ...GLOSSARY.map((e) => `- [${e.term}](${SITE}/glossary#${e.id})`),
+    ...GLOSSARY.map((e) => `- [${e.term}](${SITE}/glossary/${e.id})`),
     "",
     "## Articles by Kyle Deligny",
     "",

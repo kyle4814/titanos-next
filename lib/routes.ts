@@ -7,6 +7,7 @@ import { SITE } from "@/lib/seo";
 import { offerIndexable, SECTOR_PAGES_INDEXABLE } from "@/lib/seo-indexing";
 import { POSTS } from "@/lib/blog";
 import { GUIDES } from "@/lib/guides";
+import { GLOSSARY_PAGES, GLOSSARY_REVIEWED } from "@/lib/glossaryPages";
 import { ALL_OFFERS } from "@/lib/offers";
 import { CASES } from "@/lib/caseStudies";
 import { PRODUCTS } from "@/lib/products";
@@ -110,6 +111,7 @@ export function indexableRoutes(): SiteRoute[] {
   for (const o of ALL_OFFERS.filter(offerIndexable)) out.push(mk(`/offers/${o.slug}`, "lib/offers", { priority: 0.7 }));
   for (const p of POSTS) out.push(mk(`/blog/${p.slug}`, undefined, { priority: 0.6, lastModified: new Date(p.updated || p.date) }));
   for (const g of GUIDES) out.push(mk(`/guides/${g.slug}`, undefined, { priority: 0.8, lastModified: new Date(g.updated) }));
+  for (const g of GLOSSARY_PAGES) out.push(mk(`/glossary/${g.entry.id}`, undefined, { priority: 0.6, lastModified: new Date(GLOSSARY_REVIEWED) }));
   for (const c of CASES) out.push(mk(`/case-studies/${c.slug}`, "lib/caseStudies.ts", { priority: 0.7 }));
   for (const p of PRODUCTS) out.push(mk(`/products/${p.slug}`, "lib/products", { priority: 0.6 }));
   if (SECTOR_PAGES_INDEXABLE) for (const s of SECTORS) out.push(mk(`/sectors/${s.slug}`, "lib/site-data", { priority: 0.6 }));

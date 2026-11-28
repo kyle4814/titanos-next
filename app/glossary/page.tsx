@@ -61,7 +61,8 @@ export default function GlossaryPage() {
                 <h3 style={{ fontSize: "1.2rem", margin: "0 0 10px", color: "var(--pe-text)" }}>{e.term}</h3>
                 <p style={{ margin: "0 0 12px", lineHeight: 1.75, color: "var(--pe-text)" }}>{e.definition}</p>
                 <p style={{ margin: 0, fontSize: 14, color: "var(--pe-mute)", lineHeight: 1.7 }}>
-                  Source: <a href={e.source.url} rel="noopener noreferrer" style={{ color: "var(--pe-gold-hi)" }}>{e.source.label}</a>
+                  <Link href={`/glossary/${e.id}`} style={{ color: "var(--pe-gold-hi)" }}>Full explanation with an example</Link>
+                  {" "}| Source: <a href={e.source.url} rel="noopener noreferrer" style={{ color: "var(--pe-gold-hi)" }}>{e.source.label}</a>
                   {e.related ? (
                     <>
                       {" "}| Related: <Link href={e.related.href} style={{ color: "var(--pe-gold-hi)" }}>{e.related.label}</Link>
