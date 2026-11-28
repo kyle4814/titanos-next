@@ -185,6 +185,7 @@ node scripts/test_load_quiet_gate.mjs
 node --experimental-strip-types --no-warnings scripts/test_booking_ui.mjs
 node scripts/test_home_pricing.mjs out
 node scripts/test_book_page.mjs out
+node scripts/test_mobile_nav.mjs out
 node scripts/test_book_flow.mjs out
 node scripts/test_print_chrome_class.mjs
 node --experimental-strip-types scripts/test_declaration.mjs

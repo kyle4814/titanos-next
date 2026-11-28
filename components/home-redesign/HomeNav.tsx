@@ -116,6 +116,7 @@ export default function HomeNav() {
   const rest = LINKS.filter((l) => !shown.has(l.href));
 
   return (
+    <>
     <header className="pe-nav">
       <div className="pe-nav__bar">
         <Link href="/" className="pe-brand" aria-label="TITANOS home">
@@ -141,7 +142,10 @@ export default function HomeNav() {
           {drawer ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
         </button>
       </div>
-      <div ref={panel} id={panelId} className="pe-drawer" hidden={!drawer}>
+    </header>
+    {/* Sibling of the header, NOT a child: .pe-nav has backdrop-filter, which makes it the containing block for position:fixed
+        descendants and collapsed the drawer to the 72px bar (one link showed). */}
+      <div ref={panel} id={panelId} className="pe-drawer" role="region" aria-label="Site menu" hidden={!drawer}>
         <nav aria-label="Menu">
           <p className="pe-drawer__h">Platform</p>
           <ul>{PLATFORM.map((l) => <li key={l.href}><Link href={l.href} onClick={closeAll}>{l.label}</Link></li>)}</ul>
@@ -159,6 +163,6 @@ export default function HomeNav() {
           <Link href="/app" className="pe-btn pe-btn--gold pe-drawer__cta" onClick={closeAll}>Enter TitanOS <ArrowRight size={16} strokeWidth={2} aria-hidden="true" /></Link>
         </nav>
       </div>
-    </header>
+    </>
   );
 }
