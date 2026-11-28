@@ -200,6 +200,20 @@ export default function AboutPage() {
               . Exactly what I do, what I never do, and how to reproduce any finding.
             </li>
             <li className="pe-card pe-card--pad">
+              <strong>Author profile:</strong>{" "}
+              <a href="/authors/kyle-deligny">
+                titanos.tech/authors/kyle-deligny
+              </a>
+              . Who writes the guides and articles, what I cover, and every piece I have published.
+            </li>
+            <li className="pe-card pe-card--pad">
+              <strong>Editorial policy:</strong>{" "}
+              <a href="/editorial-policy">
+                titanos.tech/editorial-policy
+              </a>
+              . How I source, date, review and correct what I publish, and where AI is used.
+            </li>
+            <li className="pe-card pe-card--pad">
               <strong>Email:</strong>{" "}
               <a href="mailto:kyle@titanos.tech">
                 kyle@titanos.tech

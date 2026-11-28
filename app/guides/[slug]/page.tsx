@@ -47,7 +47,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   const mins = Math.max(1, Math.round(guideWordCount(g) / 230));
   return (
     <div className="gd-page" lang="en-AU">
-      <JsonLd data={article({ path, headline: g.h1, description: g.description, datePublished: g.date, dateModified: g.updated })} />
+      <JsonLd data={article({ path, headline: g.h1, description: g.description, datePublished: g.date, dateModified: g.updated, authorPath: "/authors/kyle-deligny" })} />
       <JsonLd data={breadcrumbs([{ name: "Home", path: "/" }, { name: "Guides", path: "/guides" }, { name: g.h1, path }])} />
       <JsonLd data={faqPage(g.faq)} />
       <div className="gd-wrap">
@@ -62,7 +62,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           <p className="gd-kicker">{g.cluster}</p>
           <h1>{g.h1}</h1>
           <p className="gd-by">
-            By <strong><Link href="/about">Kyle Deligny</Link></strong>, Brisbane. Last reviewed {longDate(g.updated)}. About {mins} minute read. General information, not legal advice.
+            By <strong><Link href="/authors/kyle-deligny" rel="author">Kyle Deligny</Link></strong>, Brisbane. Published {longDate(g.date)}. Last reviewed {longDate(g.updated)}. <Link href="/editorial-policy">How we write and check</Link>. About {mins} minute read. General information, not legal advice.
           </p>
         </header>
         <div className="gd-layout">

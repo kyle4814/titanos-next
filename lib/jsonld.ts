@@ -71,6 +71,8 @@ export function article(a: {
   description: string;
   datePublished?: string;
   dateModified?: string;
+  /** Author page path; defaults to /about so existing pages keep their output. */
+  authorPath?: string;
 }): Json {
   const url = `${SITE}${a.path}`;
   return {
@@ -81,7 +83,7 @@ export function article(a: {
     url,
     image: `${SITE}${ogUrl(a.path)}`,
     ...(a.datePublished ? { datePublished: a.datePublished, dateModified: a.dateModified ?? a.datePublished } : {}),
-    author: { "@type": "Person", name: "Kyle Deligny", url: `${SITE}/about` },
+    author: { "@type": "Person", name: "Kyle Deligny", url: `${SITE}${a.authorPath ?? "/about"}` },
     publisher: { "@id": ORG_ID },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
   };
