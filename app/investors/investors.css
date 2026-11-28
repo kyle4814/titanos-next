@@ -1,0 +1,14 @@
+/* Investors page only. Uses --pe-* tokens from site-system.css. */
+.inv .pe-sec-h { font-size: var(--pe-fs-h2); margin: 56px 0 14px; padding-top: 28px; border-top: 1px solid var(--pe-line); color: var(--pe-text); }
+.inv .pe-sec-h:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
+.inv .pe-body { font-size: var(--pe-fs-body); line-height: 1.75; margin: 0 0 14px; max-width: 68ch; }
+.inv ul.pe-body { padding-left: 22px; }
+.inv ul.pe-body li::marker { color: var(--pe-gold); }
+.inv .w2c-stat.pe-card { padding: 20px 22px; }
+.inv .w2c-stat__n { color: var(--pe-gold-hi); }
+.inv .w2c-stat__l { color: var(--pe-mute); }
+.inv a:focus-visible { outline: 2px solid var(--pe-gold); outline-offset: 3px; }
+.inv ul.pe-body { list-style: disc; }
+.inv ul.pe-body li { margin-bottom: 8px; }
+.inv .w2c-stat__n { font-size: clamp(1.4rem, 2.4vw, 1.9rem); line-height: 1.2; }
+.inv .pe-body { max-width: none; }
