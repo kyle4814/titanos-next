@@ -32,12 +32,12 @@ export const METRICS: Metric[] = [
   },
   {
     id: "lines", icon: "bolt", value: int("estate_sloc"), title: "Lines of production code",
-    scope: `Across ${int("estate_repos")} repositories, non-blank non-comment, ledger as of ${asOfLong("estate_sloc")}`,
+    scope: `Across ${int("estate_repos")} repositories, non-blank non-comment lines, counted ${asOfLong("estate_sloc")}`,
     status: "MEASURED", href: "/engineering", hrefLabel: "Source",
   },
   {
     id: "job-cost", icon: "trend", value: `${dec("cost_job_x")}x`, title: "Lower cost per job",
-    scope: `US$${dec("cost_job_before")} to US$${dec("cost_job_after")} on 25 matched jobs, recorded 8 October 2026`,
+    scope: `US$${dec("cost_job_before")} to US$${dec("cost_job_after")} on 25 matched jobs, recorded ${asOfLong("cost_job_x")}`,
     status: "MEASURED", href: "/efficiency", hrefLabel: "Source",
   },
 ];

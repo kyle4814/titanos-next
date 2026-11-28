@@ -3,6 +3,7 @@ import path from "node:path";
 import Link from "next/link";
 import Icon from "./Icon";
 import type { IconName } from "./Icon";
+import { HERO_STRIP, dec, int, v } from "@/lib/ledger";
 import { METRICS, SERVICES, STEPS, TRUST, CASE_OUTCOMES, PROOF_DOCS, ENGINE, ENGINE_SLUG } from "./homepageContent";
 
 const HERO_W = [480, 768, 1199] as const;
@@ -104,7 +105,7 @@ export function Systems() {
         {SERVICES.map((s, i) => (
           <li key={s.title}>
             <Link href={s.href} className={`pe-card pe-service${i === 0 ? " pe-service--lead" : ""}`} aria-label={s.aria}>
-              <span className="pe-service__t"><Icon name={s.icon as IconName} size={24} /> <h3>{s.title}</h3></span>
+              <div className="pe-service__t"><Icon name={s.icon as IconName} size={24} /> <h3>{s.title}</h3></div>
               <span className="pe-service__b">{s.body}</span>
               <span className="pe-service__go" aria-hidden="true"><Icon name="arrow" size={20} stroke={1.8} /></span>
             </Link>
@@ -205,6 +206,21 @@ export function FindOffer() {
         <Link href="/find" className="pe-btn pe-btn--gold">Find the right offer <Icon name="arrow" size={16} stroke={2} /></Link>
         <Link href="/offers" className="pe-btn pe-btn--dark">See every offer</Link>
       </div>
+    </section>
+  );
+}
+
+/** The previous homepage hero claim, kept in full and labelled MODELLED exactly as before (engineer-years, ledger-bound). */
+export function LedgerLine() {
+  return (
+    <section className="pe-wrap pe-ledgerline" aria-label="The modelled build estimate">
+      <p className="pe-kicker">The birth of a global intelligence system, measured on itself</p>
+      <h2>{dec("estate_ey")} engineer-years of output in {Math.round(v("elapsed_months"))} months.</h2>
+      <p>{HERO_STRIP}</p>
+      <p>
+        In one day the cost of a matched job fell from US${v("cost_job_before").toFixed(2)} to US${v("cost_job_after").toFixed(2)} (25 jobs, same tasks), and the main engine carries {int("tests_main")} test cases. We did not buy a bigger machine. We changed the system.{" "}
+        <Link href="/proof">See the receipts →</Link>
+      </p>
     </section>
   );
 }

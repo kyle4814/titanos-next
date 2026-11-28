@@ -1,11 +1,12 @@
 import Link from "next/link";
 import PhiWordmark from "@/components/hero/PhiWordmark";
 import Icon from "./Icon";
+import { LINKS } from "@/lib/navLinks";
 
 const COLS: { h: string; links: [string, string][] }[] = [
-  { h: "Platform", links: [["How it works", "/how-it-works"], ["Engineering record", "/engineering"], ["Methodology", "/methodology"], ["Live HUD", "/hud"], ["Trust and safety", "/trust"]] },
-  { h: "Products", links: [["All offers", "/offers"], ["AI Partnership", "/ai-delivery"], ["Compliance", "/compliance"], ["Monitor", "/monitor"], ["Verified leads", "/leads"], ["Free scan", "/scan"], ["Courses", "/courses"]] },
-  { h: "Company", links: [["About", "/about"], ["Case studies", "/case-studies"], ["Proof", "/proof"], ["Evidence pack", "/our-evidence-pack"], ["The declaration", "/declaration"], ["Pricing", "/pricing"], ["Contact", "/contact"]] },
+  { h: "Platform", links: [["How it works", "/how-it-works"], ["Engineering record", "/engineering"], ["Methodology", "/methodology"], ["Live HUD", "/hud"], ["Trust and safety", "/trust"], ["The learning loop", "/learning-loop"]] },
+  { h: "Products", links: [["All offers", "/offers"], ["AI Partnership", "/ai-delivery"], ["Compliance", "/compliance"], ["Monitor", "/monitor"], ["Verified leads", "/leads"], ["Free scan", "/scan"], ["Courses", "/courses"], ["Free AI Readiness Guide (PDF)", "/ai-readiness-guide.pdf"]] },
+  { h: "Company", links: [["About", "/about"], ["Case studies", "/case-studies"], ["Proof", "/proof"], ["Evidence pack", "/our-evidence-pack"], ["The declaration", "/declaration"], ["Pricing", "/pricing"], ["FAQ", "/faq"], ["Sectors", "/sectors"], ["The deep field", "/deep-field"], ["Contact", "/contact"]] },
 ];
 
 export default function HomeFooter() {
@@ -22,6 +23,7 @@ export default function HomeFooter() {
             <PhiWordmark height={18} title="TITANOS" />
           </Link>
           <p>AI automation and engineering with the evidence kept. Kyle Deligny, Brisbane, Australia. ABN 34 318 502 254.</p>
+          <p className="pe-footer__tag">Built without asking. Kept honest by what you can check. I personally review every deliverable before it reaches you.</p>
         </div>
         {COLS.map((c) => (
           <nav key={c.h} aria-label={c.h} className="pe-footer__col">
@@ -35,6 +37,10 @@ export default function HomeFooter() {
           <Link href="/book" className="pe-btn pe-btn--gold">Book a free call <Icon name="arrow" size={16} stroke={2} /></Link>
         </div>
       </div>
+      <details className="pe-wrap pe-allpages">
+        <summary>All pages</summary>
+        <ul>{LINKS.map((l) => <li key={l.href}><Link href={l.href}>{l.label}</Link></li>)}</ul>
+      </details>
       <div className="pe-wrap pe-footer__legal">
         <p>&copy; {year} TITANOS. All rights reserved.</p>
         <ul>

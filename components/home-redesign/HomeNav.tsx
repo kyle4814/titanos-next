@@ -32,12 +32,18 @@ const PRODUCTS: L[] = [
 
 function Dropdown({ id, label, items, open, setOpen, btnRef }: { id: string; label: string; items: L[]; open: boolean; setOpen: (v: boolean) => void; btnRef: (el: HTMLButtonElement | null) => void }) {
   const menuId = useId();
+  const [focusFirst, setFocusFirst] = useState(false);
+  // ArrowDown opens the menu, then this effect (after the list is shown) moves focus to its first link.
+  useEffect(() => {
+    if (focusFirst && open) document.getElementById(menuId)?.querySelector<HTMLElement>("a")?.focus();
+    if (focusFirst) setFocusFirst(false);
+  }, [focusFirst, open, menuId]);
   return (
     <li className="pe-nav__item" data-open={open ? "true" : "false"} onMouseEnter={() => matchMedia("(hover: hover)").matches && setOpen(true)} onMouseLeave={() => matchMedia("(hover: hover)").matches && setOpen(false)}>
       <button
         type="button" ref={btnRef} className="pe-nav__link pe-nav__btn" aria-expanded={open} aria-controls={menuId} data-menu={id}
         onClick={() => setOpen(!open)}
-        onKeyDown={(e) => { if (e.key === "ArrowDown") { e.preventDefault(); setOpen(true); requestAnimationFrame(() => document.querySelector<HTMLElement>(`#${CSS.escape(menuId)} a`)?.focus()); } }}
+        onKeyDown={(e) => { if (e.key === "ArrowDown") { e.preventDefault(); setOpen(true); setFocusFirst(true); } }}
       >
         {label} <ChevronDown size={14} strokeWidth={2} aria-hidden="true" />
       </button>

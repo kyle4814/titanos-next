@@ -48,6 +48,10 @@ export default function Credits() {
             and are credited in full below. Images are resized and re-encoded (AVIF and WebP) for speed; the colours and
             content are unchanged. Artist&apos;s concepts are labelled as illustrations.
           </p>
+          <p style={BODY}>
+            The gold T mountain artwork and the glass office render on the homepage are AI-generated images supplied by the owner. The office is an
+            illustrative concept, not a real TITANOS building. The small T mark in the header is cropped from that render.
+          </p>
           <ol style={{ listStyle: "none", padding: 0, margin: "24px 0 0" }}>
             {SPACE_IMAGES.map((m) => (
               <li key={m.id} id={m.id} style={ROW}>
