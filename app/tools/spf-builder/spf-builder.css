@@ -1,0 +1,66 @@
+/* SPF builder. Scoped under .spf; colours come from the --pe-* tokens in components/home-redesign/home-redesign.css. */
+.spf { background: var(--pe-bg, #060708); color: var(--pe-text, #f4f2ec); font-family: var(--font-body), system-ui, sans-serif; padding: 40px 0 88px; position: relative; z-index: 1; overflow-x: clip; line-height: 1.6; }
+.spf * { box-sizing: border-box; }
+.spf-wrap { width: min(100% - 32px, 1100px); margin-inline: auto; }
+.spf h1, .spf h2, .spf h3, .spf p, .spf ul, .spf ol { margin: 0; }
+.spf a { color: var(--pe-gold-hi, #f3d98c); text-decoration: underline; text-underline-offset: 3px; }
+.spf a.pe-btn { text-decoration: none; }
+.spf a:focus-visible, .spf button:focus-visible, .spf input:focus-visible, .spf textarea:focus-visible, .spf select:focus-visible, .spf summary:focus-visible { outline: 2px solid var(--pe-gold-hi, #f3d98c); outline-offset: 3px; border-radius: 6px; }
+.spf-crumbs { font-size: 14px; color: var(--pe-faint, #8f8d88); margin-bottom: 28px; }
+.spf-crumbs a { color: var(--pe-mute, #b4b2ad); }
+.spf-eyebrow { color: var(--pe-gold, #d4af37); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14px; }
+.spf h1 { font-size: clamp(30px, 5vw, 52px); line-height: 1.1; letter-spacing: -0.01em; max-width: 24ch; }
+.spf h2 { font-size: clamp(22px, 3vw, 28px); line-height: 1.2; }
+.spf-lede { margin-top: 24px; max-width: 68ch; color: var(--pe-mute, #b4b2ad); font-size: 18px; }
+.spf-tool { display: grid; grid-template-columns: 1fr; gap: 24px; margin: 40px 0 56px; }
+@media (min-width: 900px) { .spf-tool { grid-template-columns: 1fr 1fr; align-items: start; } }
+.spf-card { background: var(--pe-card, #0e1013); border: 1px solid var(--pe-line, rgba(255,255,255,.1)); border-radius: 14px; padding: 24px; min-width: 0; }
+.spf-card--out { border-color: var(--pe-line-gold, rgba(212,175,55,.34)); }
+.spf-card h2 { margin-bottom: 14px; }
+.spf-prov { list-style: none; padding: 0; display: grid; gap: 10px; }
+.spf-prov li { border: 1px solid var(--pe-line, rgba(255,255,255,.1)); border-radius: 10px; padding: 10px 14px; }
+.spf-prov label { display: flex; gap: 12px; align-items: flex-start; min-height: 44px; cursor: pointer; font-weight: 600; }
+.spf-prov input { width: 22px; height: 22px; margin-top: 3px; flex: none; accent-color: #d4af37; }
+.spf-prov small { display: block; font-weight: 400; color: var(--pe-mute, #b4b2ad); font-size: 14px; }
+.spf-tag { display: inline-block; font-size: 12px; font-weight: 600; border-radius: 99px; padding: 1px 10px; margin-left: 8px; border: 1px solid var(--pe-line-gold, rgba(212,175,55,.34)); color: var(--pe-gold-hi, #f3d98c); }
+.spf-note { color: var(--pe-faint, #8f8d88); font-size: 14px; margin: 6px 0 2px 34px; }
+.spf-field { margin-top: 18px; }
+.spf-field label { display: block; font-weight: 600; margin-bottom: 6px; }
+.spf-field input, .spf-field textarea, .spf-field select { width: 100%; min-height: 48px; padding: 10px 14px; background: #060708; color: var(--pe-text, #f4f2ec); border: 1px solid rgba(255,255,255,.28); border-radius: 8px; font: 500 16px var(--font-body), system-ui, sans-serif; }
+.spf-field textarea { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; min-height: 120px; resize: vertical; }
+.spf-field p { color: var(--pe-faint, #8f8d88); font-size: 14px; margin-top: 6px; }
+.spf-rec { margin-top: 12px; padding: 14px; background: #060708; border: 1px solid var(--pe-line, rgba(255,255,255,.1)); border-radius: 10px; font: 500 15px ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; word-break: break-word; }
+.spf-btn { margin-top: 12px; min-height: 44px; padding: 0 18px; border-radius: 8px; border: 1px solid var(--pe-line-gold, rgba(212,175,55,.34)); background: transparent; color: var(--pe-gold-hi, #f3d98c); font: 600 15px var(--font-body), system-ui, sans-serif; cursor: pointer; }
+.spf-meter { margin-top: 18px; font-size: clamp(36px, 7vw, 52px); font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.spf-meter small { font-size: 16px; font-weight: 400; color: var(--pe-mute, #b4b2ad); }
+.spf-meter--ok { color: var(--pe-gold-hi, #f3d98c); }
+.spf-meter--warn { color: #f0b429; }
+.spf-meter--fail { color: #ff8a80; }
+.spf-bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,.1); margin-top: 10px; overflow: hidden; }
+.spf-bar i { display: block; height: 100%; background: var(--pe-gold, #d4af37); }
+.spf-bar--warn i { background: #f0b429; }
+.spf-bar--fail i { background: #ff8a80; }
+.spf-find { list-style: none; padding: 0; margin-top: 18px; display: grid; gap: 8px; }
+.spf-find li { padding: 10px 14px; border-radius: 8px; border-left: 4px solid; background: rgba(255,255,255,.04); font-size: 15px; }
+.spf-find .ok { border-color: var(--pe-gold, #d4af37); }
+.spf-find .warn { border-color: #f0b429; }
+.spf-find .fail { border-color: #ff8a80; }
+.spf-find b { margin-right: 6px; }
+.spf-sec { max-width: 78ch; margin-top: 48px; }
+.spf-sec h2 { margin-bottom: 14px; }
+.spf-sec p, .spf-sec li { color: var(--pe-mute, #b4b2ad); }
+.spf-sec p { margin-top: 12px; }
+.spf-sec ul, .spf-sec ol { margin-top: 12px; padding-left: 22px; list-style: revert; }
+.spf-sec li { margin-top: 8px; }
+.spf-sec strong { color: var(--pe-text, #f4f2ec); }
+.spf-sec code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--pe-text, #f4f2ec); overflow-wrap: anywhere; }
+.spf details { border-bottom: 1px solid var(--pe-line, rgba(255,255,255,.1)); padding: 4px 0; }
+.spf summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font-weight: 600; color: var(--pe-text, #f4f2ec); }
+.spf details p { margin: 0 0 14px; }
+.spf-cta { margin-top: 64px; padding: 32px 24px; border: 1px solid var(--pe-line-gold, rgba(212,175,55,.34)); border-radius: 14px; background: var(--pe-card, #0e1013); }
+.spf-cta p { margin-top: 10px; color: var(--pe-mute, #b4b2ad); }
+.spf-cta div { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+.spf-small { font-size: 13px; color: var(--pe-faint, #8f8d88) !important; }
+.spf a.pe-btn--gold { color: #17110a; }
+.spf a.pe-btn--dark { color: var(--pe-text, #f4f2ec); }
+@media print { .spf-card--in { display: none; } }
